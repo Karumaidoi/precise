@@ -10,6 +10,8 @@ class OpenClosedScreen extends StatefulWidget {
 class _OpenClosedScreenState extends State<OpenClosedScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+    );
   }
 }

@@ -30,44 +30,46 @@ class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-        tabBar:
-            CupertinoTabBar(activeColor: Colors.orange.shade700, items: const [
-          BottomNavigationBarItem(
-              tooltip: 'Home',
-              icon: Icon(
-                BootstrapIcons.box_seam,
-                size: 22,
-              ),
-              label: 'Home'),
-          BottomNavigationBarItem(
-              tooltip: 'Messages',
-              icon: Icon(
-                BootstrapIcons.compass,
-                size: 22,
-              ),
-              label: 'Messages'),
-          BottomNavigationBarItem(
-              tooltip: 'Gigs',
-              icon: Icon(
-                BootstrapIcons.radioactive,
-                size: 22,
-              ),
-              label: ''),
-          BottomNavigationBarItem(
-              tooltip: 'Jobs',
-              icon: Icon(
-                BootstrapIcons.radioactive,
-                size: 22,
-              ),
-              label: 'Jobs'),
-          BottomNavigationBarItem(
-              tooltip: 'Profile',
-              icon: Icon(
-                BootstrapIcons.radioactive,
-                size: 22,
-              ),
-              label: 'Profile'),
-        ]),
+        backgroundColor: Theme.of(context).backgroundColor,
+        tabBar: CupertinoTabBar(
+            activeColor: Theme.of(context).primaryColor,
+            items: const [
+              BottomNavigationBarItem(
+                  tooltip: 'Home',
+                  icon: Icon(
+                    BootstrapIcons.house,
+                    size: 22,
+                  ),
+                  label: 'Home'),
+              BottomNavigationBarItem(
+                  tooltip: 'Messages',
+                  icon: Icon(
+                    BootstrapIcons.chat,
+                    size: 22,
+                  ),
+                  label: 'Messages'),
+              BottomNavigationBarItem(
+                  tooltip: 'Gigs',
+                  icon: Icon(
+                    BootstrapIcons.plus_circle,
+                    size: 22,
+                  ),
+                  label: ''),
+              BottomNavigationBarItem(
+                  tooltip: 'Jobs',
+                  icon: Icon(
+                    BootstrapIcons.folder,
+                    size: 22,
+                  ),
+                  label: 'Jobs'),
+              BottomNavigationBarItem(
+                  tooltip: 'Profile',
+                  icon: Icon(
+                    BootstrapIcons.person,
+                    size: 22,
+                  ),
+                  label: 'Profile'),
+            ]),
         tabBuilder: ((context, index) {
           switch (index) {
             case 0:

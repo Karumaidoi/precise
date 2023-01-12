@@ -2,9 +2,8 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:precise/home/Auth/create%20account/date_of_birth.dart';
 import 'package:spring_button/spring_button.dart';
-
-import '../../auth/create account/phoneNumber.dart';
 
 class CreateUserMail extends StatefulWidget {
   final String userName;
@@ -74,7 +73,7 @@ class _CreateUserMailState extends State<CreateUserMail> {
             children: [
               const Center(
                 child: Text(
-                  'Sendit Express',
+                  'Precise',
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
@@ -84,9 +83,9 @@ class _CreateUserMailState extends State<CreateUserMail> {
               const SizedBox(
                 height: 30,
               ),
-              Text(
-                '${widget.userName.split(' ')[0]}, what\'s your email address?',
-                style: const TextStyle(
+              const Text(
+                'what\'s your email address?',
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -162,8 +161,7 @@ class _CreateUserMailState extends State<CreateUserMail> {
                 } else {
                   Navigator.of(context)
                       .push(CupertinoPageRoute(builder: (context) {
-                    return CreateUserPhone(
-                        userName: widget.userName, email: email);
+                    return VerifyOtpToken(userName: widget.userName);
                   }));
                 }
               },

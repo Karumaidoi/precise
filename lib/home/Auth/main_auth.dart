@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:precise/home/Auth/create%20account/email_address.dart';
 
-import 'create account/userName.dart';
 import 'log_in.dart';
 
 class MainAuth extends StatelessWidget {
@@ -103,7 +103,9 @@ class MainAuth extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context)
                               .push(CupertinoPageRoute(builder: (context) {
-                            return const CreateUserName();
+                            return const CreateUserMail(
+                              userName: '',
+                            );
                           }));
                         },
                         child: Text(

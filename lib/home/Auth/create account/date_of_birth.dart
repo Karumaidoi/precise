@@ -1,30 +1,24 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_holo_date_picker/date_picker.dart';
-import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
 import 'package:spring_button/spring_button.dart';
+import 'package:pinput/pinput.dart';
 
-import '../../auth/verify_otp.dart';
+import '../../views/main_home.dart';
 
-class CreateUserDOB extends StatefulWidget {
+class VerifyOtpToken extends StatefulWidget {
   final String userName;
-  final String email;
-  final String phoneNumber;
-  const CreateUserDOB({
-    super.key,
-    required this.userName,
-    required this.email,
-    required this.phoneNumber,
-  });
+  const VerifyOtpToken({super.key, required this.userName});
 
   @override
-  State<CreateUserDOB> createState() => _CreateUserDOBState();
+  State<VerifyOtpToken> createState() => _VerifyOtpTokenState();
 }
 
-class _CreateUserDOBState extends State<CreateUserDOB> {
-  String dob = '';
+class _VerifyOtpTokenState extends State<VerifyOtpToken> {
+  String pinToken = '';
+  bool showPassword = true;
 
   //Flash Bar
   Flushbar<dynamic> flashBar(
@@ -53,146 +47,160 @@ class _CreateUserDOBState extends State<CreateUserDOB> {
             fontWeight: FontWeight.bold,
             fontSize: 16.0,
             color: Colors.white,
-            fontFamily: "Gordita"),
+            fontFamily: "Nunito"),
       ),
       messageText: Text(
         subtitle,
         style: const TextStyle(
-            fontSize: 15.0, color: Colors.white, fontFamily: "Gordita"),
+            fontSize: 15.0, color: Colors.white, fontFamily: "Nunito"),
       ),
     );
   }
 
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: isLoading,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Theme.of(context).buttonColor,
-              )),
-        ),
-        body: Column(
-          children: [
-            Column(
-              children: [
-                const Center(
-                  child: Text(
-                    'Sendit Express',
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                    ),
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: const TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
+      borderRadius: BorderRadius.circular(8),
+    );
+
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration!.copyWith(
+        color: const Color.fromRGBO(234, 239, 243, 1),
+      ),
+    );
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Theme.of(context).buttonColor,
+            )),
+      ),
+      body: Column(
+        children: [
+          Column(
+            children: [
+              const Center(
+                child: Text(
+                  'Precise',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                'Create your account password',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Text(
-                    '${widget.userName.split(' ')[0]}, what\'s your birthday? \n You must be 18+ years of Age.',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      height: 1.4,
-                      fontWeight: FontWeight.w600,
-                    ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextField(
+                  obscureText: showPassword,
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    var date = await DatePicker.showSimpleDatePicker(
-                      context,
-                      backgroundColor: Theme.of(context).cardColor,
-                      confirmText: 'Ok',
-                      textColor: Theme.of(context).buttonColor,
-                      itemTextStyle: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                      ),
-                      initialDate: DateTime(2022),
-                      firstDate: DateTime(1960),
-                      lastDate: DateTime(2022, 8),
-                      dateFormat: "dd-MMMM-yyyy",
-                      locale: DateTimePickerLocale.en_us,
-                      looping: true,
-                    );
+                  onChanged: (value) {
                     setState(() {
-                      dob = date == null ? '' : date.toString().split(" ")[0];
+                      pinToken = value;
                     });
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Text(
-                      dob == '' ? 'YYYY MM DD' : dob,
-                      style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: dob == ''
-                              ? Theme.of(context).buttonColor.withOpacity(.3)
-                              : Theme.of(context).buttonColor),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const Spacer(),
-            Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Text(
-                    'By tapping "Finish", you agree to our Privacy Policy and Terms of Service',
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(fontSize: 15, height: 1.6, wordSpacing: 1.4),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 28),
-                  child: SpringButton(
-                    SpringButtonType.OnlyScale,
-                    Container(
-                      height: 55,
-                      width: MediaQuery.of(context).size.width * .7,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Theme.of(context).primaryColor),
-                      child: const Center(
-                          child: Text(
-                        'Finish',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          },
+                          icon: Icon(
+                            showPassword
+                                ? BootstrapIcons.eye
+                                : BootstrapIcons.eye_slash_fill,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                      border: InputBorder.none,
+                      hintText: 'Enter password',
+                      hintStyle: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).buttonColor.withOpacity(.4),
                       )),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                          CupertinoPageRoute(builder: (context) {
-                        return const VerifyOtpToken(
-                          userName: '',
-                        );
-                      }));
-                    },
-                  ),
                 ),
-              ],
-            )
-          ],
-        ),
+              )
+            ],
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 28),
+            child: SpringButton(
+              SpringButtonType.OnlyScale,
+              Container(
+                height: 55,
+                width: MediaQuery.of(context).size.width * .7,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(context).primaryColor),
+                child: const Center(
+                    child: Text(
+                  'Continue',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+              ),
+              onTap: () {
+                if (pinToken == '' || pinToken.length < 6) {
+                  flashBar(
+                      Colors.red,
+                      'OTP Code',
+                      'Unable to verify password.',
+                      const Icon(
+                        BootstrapIcons.capsule,
+                        color: Colors.white,
+                      )).show(context);
+                } else {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context)
+                      .pushReplacement(CupertinoPageRoute(builder: (context) {
+                    return const MainHome();
+                  }));
+                }
+              },
+            ),
+          )
+        ],
       ),
     );
   }
