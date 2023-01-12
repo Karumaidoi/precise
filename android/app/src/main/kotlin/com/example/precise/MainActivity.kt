@@ -1,4 +1,4 @@
-package com.example.precise
+package com.basemartkenya.precise
 
 import io.flutter.embedding.android.FlutterActivity
 
