@@ -18,6 +18,7 @@ class VerifyOtpToken extends StatefulWidget {
 
 class _VerifyOtpTokenState extends State<VerifyOtpToken> {
   String pinToken = '';
+  bool showPassword = true;
 
   //Flash Bar
   Flushbar<dynamic> flashBar(
@@ -99,7 +100,7 @@ class _VerifyOtpTokenState extends State<VerifyOtpToken> {
             children: [
               const Center(
                 child: Text(
-                  'Sendit Express',
+                  'Precise',
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
@@ -110,7 +111,7 @@ class _VerifyOtpTokenState extends State<VerifyOtpToken> {
                 height: 30,
               ),
               const Text(
-                'Verify OTP Code sent to your \n email address',
+                'Create your account password',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -122,21 +123,37 @@ class _VerifyOtpTokenState extends State<VerifyOtpToken> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Pinput(
-                  length: 6,
-                  errorTextStyle:
-                      const TextStyle(fontSize: 12, color: Colors.red),
-                  defaultPinTheme: defaultPinTheme,
-                  focusedPinTheme: focusedPinTheme,
-                  submittedPinTheme: submittedPinTheme,
-                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                  showCursor: true,
-                  onChanged: (pin) {
+                child: TextField(
+                  obscureText: showPassword,
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  onChanged: (value) {
                     setState(() {
-                      pinToken = pin;
+                      pinToken = value;
                     });
                   },
-                  onCompleted: (pin) => {},
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              showPassword = !showPassword;
+                            });
+                          },
+                          icon: Icon(
+                            BootstrapIcons.eye,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                      border: InputBorder.none,
+                      hintText: 'Enter password',
+                      hintStyle: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).buttonColor.withOpacity(.4),
+                      )),
                 ),
               )
             ],
@@ -162,11 +179,11 @@ class _VerifyOtpTokenState extends State<VerifyOtpToken> {
                 )),
               ),
               onTap: () {
-                if (pinToken == '') {
+                if (pinToken == '' || pinToken.length < 6) {
                   flashBar(
                       Colors.red,
                       'OTP Code',
-                      'Unable to verify OTP Code.',
+                      'Unable to verify password.',
                       const Icon(
                         BootstrapIcons.capsule,
                         color: Colors.white,

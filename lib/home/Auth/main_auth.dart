@@ -23,20 +23,20 @@ class MainAuth extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Sendit Express',
+                      'Precise',
                       style: TextStyle(
                           color: Theme.of(context).buttonColor,
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     const Text(
-                      "Create an Account, It will help you accelerate \n your next travel.",
+                      "Create an Account with precise to \n unlock the magic.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500,
                         height: 1.4,
                       ),
@@ -71,11 +71,7 @@ class MainAuth extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Icon(
-                            Feather.log_in,
-                            color: Colors.white,
-                            size: 22,
-                          ),
+                          SizedBox(),
                           Text(
                             'Log in',
                             style: TextStyle(
@@ -99,7 +95,9 @@ class MainAuth extends StatelessWidget {
                     Text(
                       'Don\'t have an acoount?',
                       style: TextStyle(
-                          color: Theme.of(context).buttonColor, fontSize: 13),
+                          color: Theme.of(context).buttonColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
                     ),
                     TextButton(
                         onPressed: () {
@@ -112,7 +110,7 @@ class MainAuth extends StatelessWidget {
                           "Create Account",
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
-                              fontSize: 14,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ))
                   ],

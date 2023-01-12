@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Center(
                 child: Text(
-                  'Sendit Express',
+                  'Precise',
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               const Text(
                 'Enter your email address?',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 17,
                   fontWeight: FontWeight.w600,
                 ),
               ),
