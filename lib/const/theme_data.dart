@@ -8,7 +8,7 @@ class Styles {
       platform: TargetPlatform.iOS,
       scaffoldBackgroundColor:
           isDarkTheme ? Colors.black : Colors.grey.shade300,
-      primaryColor: Color(0xFF2D033B),
+      primaryColor: Color(0xFFEB6440),
       accentColor: isDarkTheme ? const Color(0xFF151515) : Colors.transparent,
       backgroundColor:
           isDarkTheme ? const Color.fromARGB(255, 0, 0, 0) : Colors.white,
@@ -36,11 +36,11 @@ class Styles {
               fontSize: 12.0,
               color: isDarkTheme ? Colors.white : Colors.black)),
       cupertinoOverrideTheme: const CupertinoThemeData(
-        primaryColor: Color(0xFF2D033B),
+        primaryColor: Color(0xFFEB6440),
       ),
       textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Color(0xFF2D033B),
-          selectionHandleColor: Color(0xFF2D033B),
+          cursorColor: Color(0xFFEB6440),
+          selectionHandleColor: Color(0xFFEB6440),
           selectionColor: isDarkTheme
               ? Color.fromARGB(55, 255, 255, 255)
               : Color.fromARGB(64, 0, 0, 0)),

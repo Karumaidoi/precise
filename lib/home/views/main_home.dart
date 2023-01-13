@@ -4,10 +4,12 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:precise/home/views/pages/gigs.dart';
 import 'package:precise/home/views/pages/messages.dart';
 import 'package:precise/home/views/pages/new_jobs.dart';
 import 'package:precise/home/views/pages/profile.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/home_page.dart';
@@ -20,6 +22,13 @@ class MainHome extends StatefulWidget {
 }
 
 class _MainHomeState extends State<MainHome> {
+  int index = 0;
+  List pages = const [
+    HomePage(),
+    OpenClosedScreen(),
+    MessagesScreen(),
+    ProfilePage()
+  ];
   @override
   void initState() {
     super.initState();
@@ -29,62 +38,34 @@ class _MainHomeState extends State<MainHome> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        tabBar: CupertinoTabBar(
-            activeColor: Theme.of(context).primaryColor,
-            items: const [
-              BottomNavigationBarItem(
-                  tooltip: 'Home',
-                  icon: Icon(
-                    BootstrapIcons.house,
-                    size: 22,
-                  ),
-                  label: 'Home'),
-              BottomNavigationBarItem(
-                  tooltip: 'Messages',
-                  icon: Icon(
-                    BootstrapIcons.chat,
-                    size: 22,
-                  ),
-                  label: 'Messages'),
-              BottomNavigationBarItem(
-                  tooltip: 'Gigs',
-                  icon: Icon(
-                    BootstrapIcons.plus_circle,
-                    size: 22,
-                  ),
-                  label: ''),
-              BottomNavigationBarItem(
-                  tooltip: 'Jobs',
-                  icon: Icon(
-                    BootstrapIcons.folder,
-                    size: 22,
-                  ),
-                  label: 'Jobs'),
-              BottomNavigationBarItem(
-                  tooltip: 'Profile',
-                  icon: Icon(
-                    BootstrapIcons.person,
-                    size: 22,
-                  ),
-                  label: 'Profile'),
-            ]),
-        tabBuilder: ((context, index) {
-          switch (index) {
-            case 0:
-              return const HomePage();
-            case 1:
-              return const MessagesScreen();
-            case 2:
-              return const GigsPage();
-            case 3:
-              return const OpenClosedScreen();
-            case 4:
-              return const ProfilePage();
-            default:
-              return const HomePage();
-          }
-        }));
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: pages[index],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: index,
+          onTap: (i) {
+            setState(() {
+              index = i;
+            });
+          },
+          showUnselectedLabels: true,
+          unselectedLabelStyle:
+              TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          selectedLabelStyle: TextStyle(
+              color: Theme.of(context).buttonColor,
+              fontWeight: FontWeight.bold),
+          selectedIconTheme:
+              IconThemeData(color: Theme.of(context).buttonColor),
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: 'Jobs'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: 'Inbox'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), label: 'Account'),
+          ]),
+    );
   }
 }
