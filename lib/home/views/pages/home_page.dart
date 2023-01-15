@@ -37,16 +37,17 @@ class HomePage extends StatelessWidget {
                     location: 'Nairobi, Kenya',
                     type: 'Freelance',
                     icon: const Icon(
-                      BootstrapIcons.basket,
+                      Zocial.yelp,
                       color: Colors.white,
                     ),
                     numberApplications: '25',
                     time: '8',
                     isBookmarked: true,
                     color: Theme.of(context).primaryColor,
+                    id: '56FDJ74BD7',
                   ),
                   const JobWidget(
-                    jobTitle: 'Strategic Project Associate, East - Java',
+                    jobTitle: 'Strategic Project Associate',
                     company: 'Basemart',
                     location: 'Machakos, Kenya',
                     type: 'Contract',
@@ -58,6 +59,7 @@ class HomePage extends StatelessWidget {
                     time: '23',
                     isBookmarked: false,
                     color: Color(0xFFA0C3D2),
+                    id: '7HCB3VCHG',
                   ),
                   const JobWidget(
                     jobTitle: 'Junior Product Designer',
@@ -72,6 +74,7 @@ class HomePage extends StatelessWidget {
                     time: '6',
                     isBookmarked: true,
                     color: Color(0xFF658864),
+                    id: '08GT3BVFKSW',
                   ),
                   const JobWidget(
                     jobTitle: 'Graphic Designer',
@@ -86,6 +89,7 @@ class HomePage extends StatelessWidget {
                     time: '3',
                     isBookmarked: false,
                     color: Color(0xFFA75D5D),
+                    id: 'G23VDH2DH',
                   ),
                 ],
               ),
@@ -107,6 +111,7 @@ class JobWidget extends StatelessWidget {
   final String time;
   final bool isBookmarked;
   final Color color;
+  final String id;
   const JobWidget({
     Key? key,
     required this.jobTitle,
@@ -118,6 +123,7 @@ class JobWidget extends StatelessWidget {
     required this.time,
     required this.isBookmarked,
     required this.color,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -133,10 +139,33 @@ class JobWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        jobTitle,
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            jobTitle,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: const Color(0xFF1A0000).withOpacity(.4)),
+                            child: Center(
+                              child: Text(
+                                '#$id',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 5,

@@ -52,9 +52,9 @@ class _MainHomeState extends State<MainHome> {
               width: 4,
             ),
             Text.rich(
-              TextSpan(text: 'Find', children: [
+              TextSpan(text: 'Available', children: [
                 TextSpan(
-                    text: "Work",
+                    text: "Jobs",
                     style: TextStyle(color: Theme.of(context).primaryColor))
               ]),
               style: const TextStyle(
