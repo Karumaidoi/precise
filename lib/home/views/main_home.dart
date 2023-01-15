@@ -67,11 +67,11 @@ class _MainHomeState extends State<MainHome> {
       ),
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.orange,
+        selectedItemColor: Theme.of(context).primaryColor,
         currentIndex: index,
         onTap: (value) {
           setState(() {
-            this.index = value;
+            index = value;
           });
         },
         type: BottomNavigationBarType.fixed,
