@@ -40,6 +40,31 @@ class _MainHomeState extends State<MainHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Icon(
+              BootstrapIcons.chat_right_fill,
+              color: Theme.of(context).primaryColor,
+              size: 21,
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            Text.rich(
+              TextSpan(text: 'Find', children: [
+                TextSpan(
+                    text: "Work",
+                    style: TextStyle(color: Theme.of(context).primaryColor))
+              ]),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            )
+          ],
+        ),
+      ),
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.orange,
