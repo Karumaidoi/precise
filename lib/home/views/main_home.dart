@@ -42,30 +42,33 @@ class _MainHomeState extends State<MainHome> {
       backgroundColor: Theme.of(context).backgroundColor,
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: index,
-          onTap: (i) {
-            setState(() {
-              index = i;
-            });
-          },
-          showUnselectedLabels: true,
-          unselectedLabelStyle:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          selectedLabelStyle: TextStyle(
-              color: Theme.of(context).buttonColor,
-              fontWeight: FontWeight.bold),
-          selectedIconTheme:
-              IconThemeData(color: Theme.of(context).buttonColor),
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled), label: 'Jobs'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled), label: 'Inbox'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled), label: 'Account'),
-          ]),
+        selectedItemColor: Colors.orange,
+        currentIndex: index,
+        onTap: (value) {
+          setState(() {
+            this.index = value;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_filled),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(BootstrapIcons.rocket_takeoff),
+            label: 'Job',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.mail_outline_rounded),
+            label: 'Inbox',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(BootstrapIcons.person),
+            label: 'Account',
+          ),
+        ],
+      ),
     );
   }
 }
